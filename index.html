@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <title>Tables Output & Processing</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12"><!-- Table 1 -->
+                <table class="table table-striped" id="table1">
+                    <caption class="text-center">Table 1</caption>
+                    <tr>
+                        <th>Index #</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>A1</td>
+                        <td>41</td>
+                    </tr>
+                    <tr>
+                        <td>A2</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>A3</td>
+                        <td>21</td>
+                    </tr>
+                    <tr>
+                        <td>A4</td>
+                        <td>63</td>
+                    </tr>
+                    <tr>
+                        <td>A5</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>A6</td>
+                        <td>53</td>
+                    </tr>
+                    <tr>
+                        <td>A7</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>A8</td>
+                        <td>57</td>
+                    </tr>
+                    <tr>
+                        <td>A9</td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>A10</td>
+                        <td>93</td>
+                    </tr>
+                    <tr>
+                        <td>A11</td>
+                        <td>28</td>
+                    </tr>
+                    <tr>
+                        <td>A12</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>A13</td>
+                        <td>90</td>
+                    </tr>
+                    <tr>
+                        <td>A14</td>
+                        <td>39</td>
+                    </tr>
+                    <tr>
+                        <td>A15</td>
+                        <td>80</td>
+                    </tr>
+                    <tr>
+                        <td>A16</td>
+                        <td>88</td>
+                    </tr>
+                    <tr>
+                        <td>A17</td>
+                        <td>49</td>
+                    </tr>
+                    <tr>
+                        <td>A18</td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>A19</td>
+                        <td>26</td>
+                    </tr>
+                    <tr>
+                        <td>A20</td>
+                        <td>28</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12"><!-- Table 2 -->
+                <table class="table table-striped" id="table2">
+                    <caption class="text-center">Table 2</caption>
+                    <tr>
+                        <th>Category</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Alpha</td>
+                        <td id="alpha"></td>
+                    </tr>
+                    <tr>
+                        <td>Beta</td>
+                        <td id="beta"></td>
+                    </tr>
+                    <tr>
+                        <td>Charlie</td>
+                        <td id="charlie"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Function to update Table 2 values based on Table 1 values
+        function updateTable2() {
+            var table1Rows = document.querySelectorAll('#table1 tr:not(:first-child)');
+            var A5 = parseInt(table1Rows[4].cells[1].textContent);
+            var A20 = parseInt(table1Rows[19].cells[1].textContent);
+            var A15 = parseInt(table1Rows[14].cells[1].textContent);
+            var A7 = parseInt(table1Rows[6].cells[1].textContent);
+            var A13 = parseInt(table1Rows[12].cells[1].textContent);
+            var A12 = parseInt(table1Rows[11].cells[1].textContent);
+
+            var alphaValue = isNaN(A5) || isNaN(A20) ? '' : A5 + A20;
+            var betaValue = isNaN(A15) || isNaN(A7) || A7 === 0 ? '' : A15 / A7;
+            var charlieValue = isNaN(A13) || isNaN(A12) ? '' : A13 * A12;
+
+            document.getElementById('alpha').textContent = alphaValue;
+            document.getElementById('beta').textContent = betaValue;
+            document.getElementById('charlie').textContent = charlieValue;
+        }
+
+        // Call the function initially to set Table 2 values
+        updateTable2();
+
+        // Listen for changes in Table 1 values and update Table 2 accordingly
+        document.querySelectorAll('#table1 input').forEach(item => {
+            item.addEventListener('input', updateTable2);
+        });
+    </script>
+
+</body>
+
+</html>
